@@ -136,6 +136,6 @@ public class Challenge {
             }
         }
 
-        System.out.println("Hello World!");
+        
     }
 }
