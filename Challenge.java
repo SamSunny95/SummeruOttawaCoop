@@ -38,6 +38,8 @@ public class Challenge {
 
         }
 
+        String[] returnArray;
+
         for (int i = 0; i < commands.length; i++) {
             switch (commands[i]) {
                 case "EducatorOnline":
@@ -66,39 +68,69 @@ public class Challenge {
                     for (Prof prof : profs) {
                         if (prof.name.equals(commands[i + 1])) {
                             if (prof.subject.equals(commands[i + 2])) {
-                                prof.subject = commands[i+3];
+                                prof.subject = commands[i + 3];
                             }
                         }
                     }
-                    i+=3;
+                    i += 3;
 
                     break;
 
                 case "EducatorOffline":
-                for (Prof prof : profs) {
-                    if (prof.name.equals(commands[i + 1])) {
-                        if (prof.subject.equals(commands[i + 2])) {
-                            profs.remove(prof);
+                    for (Prof prof : profs) {
+                        if (prof.name.equals(commands[i + 1])) {
+                            if (prof.subject.equals(commands[i + 2])) {
+                                profs.remove(prof);
+                            }
                         }
                     }
-                }
-                i+=2;
+                    i += 2;
 
                     break;
 
                 case "ViewsInSubject":
                     int count = 0;
                     for (Prof prof : profs) {
-                        if(prof.subject.equals(commands[i+1]))
+                        if (prof.subject.equals(commands[i + 1])) {
+                            count += prof.views;
+                        }
                     }
+                    i += 1;
+                    returnArray[0] = String.valueOf(count);
 
                     break;
 
                 case "TopEducatorOfSubject":
+                    String topEducator = null;
+                    int topViews = 0;
+                    for (Prof prof : profs) {
+                        if (prof.subject.equals(commands[i + 1])) {
+                            if (prof.views > topViews) {
+                                topViews = prof.views;
+                                topEducator = prof.name;
+                            }
+                        }
+                    }
+                    if (topEducator != null) {
+                        returnArray[0] = topEducator;
+                    }
+                    i += 1;
 
                     break;
 
                 case "TopEducator":
+                    topEducator = null;
+                    topViews = 0;
+                    for (Prof prof : profs) {
+                        if (prof.views > topViews) {
+                            topViews = prof.views;
+                            topEducator = prof.name;
+                        }
+                    }
+                    if (topEducator != null) {
+                        returnArray[0] = String.valueOf(topViews);
+                        returnArray[1] = topEducator;
+                    }
 
                     break;
             }
